@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('pull code') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '074c739e-92a4-4bca-ae1e-db81833006e2', url: 'https://csgitlab.ucd.ie:group13/staff-portal-back-end.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '074c739e-92a4-4bca-ae1e-db81833006e2', url: 'https://csgitlab.ucd.ie/group13/staff-portal-back-end']]])
             }
         }
         stage('build project'){
