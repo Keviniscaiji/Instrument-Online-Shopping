@@ -19,7 +19,6 @@ public class CodeGenerator {
 
     @Test
     public void run() {
-
         // 1、创建代码生成器
         AutoGenerator mpg = new AutoGenerator();
 
@@ -58,7 +57,7 @@ public class CodeGenerator {
 
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("commodity", "commodity_comment","commodity_introduction");
+        strategy.setInclude("commodity_comment_like");
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
 
@@ -69,7 +68,6 @@ public class CodeGenerator {
         strategy.setControllerMappingHyphenStyle(true); //url中驼峰转连字符
 
         mpg.setStrategy(strategy);
-
 
         // 6、执行
         mpg.execute();

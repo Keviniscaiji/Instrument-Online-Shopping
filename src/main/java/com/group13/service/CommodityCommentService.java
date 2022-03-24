@@ -3,6 +3,8 @@ package com.group13.service;
 import com.group13.entity.CommodityComment;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.Map;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CommodityCommentService extends IService<CommodityComment> {
 
+    /**
+     * getInfoList by commodity id
+     *
+     * @param current
+     * @param limit
+     * @param commodityId
+     * @return
+     */
+    Map<String, Object> getInfoList(long current, long limit, String commodityId);
 }

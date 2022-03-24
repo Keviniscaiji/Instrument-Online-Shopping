@@ -42,6 +42,9 @@ public class CommodityComment implements Serializable {
     @ApiModelProperty(value = "user_id")
     private String userId;
 
+    @ApiModelProperty(value = "like_amount")
+    private Integer likeAmount;
+
     @ApiModelProperty(value = "created time")
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
