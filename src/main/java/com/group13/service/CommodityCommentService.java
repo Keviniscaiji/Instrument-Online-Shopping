@@ -24,4 +24,18 @@ public interface CommodityCommentService extends IService<CommodityComment> {
      * @return
      */
     Map<String, Object> getInfoList(long current, long limit, String commodityId);
+
+    /**
+     * remove comment by id
+     * @param id
+     * @return
+     */
+    boolean removeCommentById(String id);
+
+    /**
+     * remove comment by Commodity id
+     * @param id
+     * @return
+     */
+    boolean removeCommentByCommodityId(String id);
 }

@@ -3,16 +3,16 @@ package com.group13.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.group13.entity.Commodity;
-import com.group13.entity.CommodityComment;
 import com.group13.entity.CommodityIntroduction;
+import com.group13.entity.Post;
 import com.group13.entity.dto.CommodityBasicInfoDto;
 import com.group13.entity.vo.CommodityQueryVo;
 import com.group13.handler.exception.Group13Exception;
-import com.group13.mapper.CommodityCommentMapper;
-import com.group13.mapper.CommodityIntroductionMapper;
-import com.group13.mapper.CommodityMapper;
+import com.group13.mapper.*;
+import com.group13.service.CommodityCommentService;
 import com.group13.service.CommodityService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.group13.service.PostCommentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,13 +37,17 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
 
     private CommodityMapper commodityMapper;
     private CommodityIntroductionMapper introductionMapper;
-    private CommodityCommentMapper commentMapper;
+    private CommodityCommentService commentService;
+    private PostCommentService postCommentService;
+    private PostMapper postMapper;
 
     @Autowired
-    public CommodityServiceImpl(CommodityMapper commodityMapper, CommodityIntroductionMapper introductionMapper, CommodityCommentMapper commentMapper) {
+    public CommodityServiceImpl(CommodityMapper commodityMapper, CommodityIntroductionMapper introductionMapper, CommodityCommentService commentService, PostCommentService postCommentService, PostMapper postMapper) {
         this.commodityMapper = commodityMapper;
         this.introductionMapper = introductionMapper;
-        this.commentMapper = commentMapper;
+        this.commentService = commentService;
+        this.postCommentService = postCommentService;
+        this.postMapper = postMapper;
     }
 
     /**
@@ -133,9 +137,14 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
     @Override
     public boolean removeCommodity(String id) {
         introductionMapper.deleteById(id);
-        QueryWrapper<CommodityComment> queryWrapper = new QueryWrapper<>();
+        commentService.removeCommentByCommodityId(id);
+        QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("commodity_id", id);
-        commentMapper.delete(queryWrapper);
+        List<Post> posts = postMapper.selectList(queryWrapper);
+        for (Post post : posts) {
+            postCommentService.removeCommentByPostId(post.getId());
+        }
+        postMapper.delete(queryWrapper);
         int flag = commodityMapper.deleteById(id);
         System.out.println(flag);
         return flag > 0;
@@ -187,7 +196,7 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
     public void updateBasicInfo(CommodityBasicInfoDto commodityBasicInfoDto, String id) {
         Commodity commodity = commodityMapper.selectById(id);
         BeanUtils.copyProperties(commodityBasicInfoDto, commodity);
-        int update = commodityMapper.updateById(commodity);
+        commodityMapper.updateById(commodity);
     }
 
 }

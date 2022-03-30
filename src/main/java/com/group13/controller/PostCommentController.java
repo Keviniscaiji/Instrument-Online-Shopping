@@ -3,15 +3,15 @@ package com.group13.controller;
 
 import com.group13.common.R;
 import com.group13.entity.CommodityComment;
-import com.group13.entity.User;
+import com.group13.entity.Post;
+import com.group13.entity.PostComment;
 import com.group13.service.CommodityCommentService;
+import com.group13.service.PostCommentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,32 +20,32 @@ import java.util.Map;
  * </p>
  *
  * @author group13
- * @since 2022-03-16
+ * @since 2022-03-30
  */
 @RestController
-@RequestMapping("/commodity-comment")
-@Api(tags = "commodity-comment controller")
+@RequestMapping("/post-comment")
+@Api(tags = "post-comment controller")
 @CrossOrigin
-public class CommodityCommentController {
+public class PostCommentController {
 
-    private CommodityCommentService commentService;
+    private PostCommentService commentService;
 
     @Autowired
-    public CommodityCommentController(CommodityCommentService commentService) {
+    public PostCommentController(PostCommentService commentService) {
         this.commentService = commentService;
     }
 
     /**
-     * getInfoList by commodity id
-     * @param commodityId
+     * getInfoList by post id
+     * @param postId
      * @return
      */
-    @ApiOperation("getInfoList by commodity id")
-    @GetMapping("getInfoList/{commodityId}/{current}/{limit}")
-    public R getInfoList(@PathVariable("commodityId") String commodityId,
+    @ApiOperation("getInfoList by post id")
+    @GetMapping("getInfoList/{postId}/{current}/{limit}")
+    public R getInfoList(@PathVariable("postId") String postId,
                          @PathVariable("current") long current,
                          @PathVariable("limit") long limit){
-        Map<String, Object> map = commentService.getInfoList(current, limit, commodityId);
+        Map<String, Object> map = commentService.getInfoList(current, limit, postId);
         return R.ok().data(map);
     }
 
@@ -72,8 +72,8 @@ public class CommodityCommentController {
     @ApiOperation("getInfo by id")
     @GetMapping("getDetail/{id}")
     public R getInfoList(@PathVariable("id") String id){
-        CommodityComment commodityComment = commentService.getById(id);
-        return R.ok().data("detail", commodityComment);
+        PostComment postComment = commentService.getById(id);
+        return R.ok().data("detail", postComment);
     }
 
     /**
@@ -83,9 +83,9 @@ public class CommodityCommentController {
      */
     @ApiOperation("edit comment content")
     @PostMapping("editComment")
-    public R editComment(@RequestBody CommodityComment detail){
+    public R editComment(@RequestBody PostComment detail){
         String id = detail.getId();
-        CommodityComment comment = commentService.getById(id);
+        PostComment comment = commentService.getById(id);
         comment.setContent(detail.getContent());
         commentService.updateById(comment);
         return R.ok();
