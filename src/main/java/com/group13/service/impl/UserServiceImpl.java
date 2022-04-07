@@ -76,4 +76,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         map.put("rows", records);
         return map;
     }
+
+    /**
+     * 计算某天注册人数
+     * @param day
+     * @return
+     */
+    @Override
+    public Integer countRegister(String day) {
+        return userMapper.countRegister(day);
+    }
+
 }

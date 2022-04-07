@@ -31,4 +31,11 @@ public interface PostService extends IService<Post> {
      * @return
      */
     boolean removePostById(String id);
+
+    /**
+     * 计算某天post数量
+     * @param day
+     * @return
+     */
+    Integer countPost(String day);
 }

@@ -90,4 +90,14 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         int flag = postMapper.deleteById(id);
         return flag > 0;
     }
+
+    /**
+     * 计算某天post数量
+     * @param day
+     * @return
+     */
+    @Override
+    public Integer countPost(String day) {
+        return postMapper.countPost(day);
+    }
 }

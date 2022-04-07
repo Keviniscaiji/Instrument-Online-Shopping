@@ -202,4 +202,25 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
         commodityMapper.updateById(commodity);
     }
 
+    /**
+     * 计算某天访问量
+     * @param day
+     * @return
+     */
+    @Override
+    public Integer countVisit(String day) {
+        return commodityMapper.countVisit(day);
+    }
+
+
+    /**
+     * 计算某天购买量
+     * @param day
+     * @return
+     */
+    @Override
+    public Integer countBuy(String day) {
+        return commodityMapper.countBuy(day);
+    }
+
 }

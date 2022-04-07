@@ -54,4 +54,18 @@ public interface CommodityService extends IService<Commodity> {
      * @return
      */
     void updateBasicInfo(CommodityBasicInfoDto commodityBasicInfoDto, String id);
+
+    /**
+     * 计算某天访问量
+     * @param day
+     * @return
+     */
+    Integer countVisit(String day);
+
+    /**
+     * 计算某天购买量
+     * @param day
+     * @return
+     */
+    Integer countBuy(String day);
 }
