@@ -57,6 +57,9 @@ public class Commodity implements Serializable {
     @ApiModelProperty(value = "buy_amount")
     private Integer buyAmount;
 
+    @ApiModelProperty(value = "like_amount")
+    private Integer likeAmount;
+
     @ApiModelProperty(value = "created time")
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;

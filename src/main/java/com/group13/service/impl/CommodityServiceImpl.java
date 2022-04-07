@@ -2,9 +2,7 @@ package com.group13.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.group13.entity.Commodity;
-import com.group13.entity.CommodityIntroduction;
-import com.group13.entity.Post;
+import com.group13.entity.*;
 import com.group13.entity.dto.CommodityBasicInfoDto;
 import com.group13.entity.vo.CommodityQueryVo;
 import com.group13.handler.exception.Group13Exception;
@@ -40,14 +38,16 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
     private CommodityCommentService commentService;
     private PostCommentService postCommentService;
     private PostMapper postMapper;
+    private CommodityLikeMapper likeMapper;
 
     @Autowired
-    public CommodityServiceImpl(CommodityMapper commodityMapper, CommodityIntroductionMapper introductionMapper, CommodityCommentService commentService, PostCommentService postCommentService, PostMapper postMapper) {
+    public CommodityServiceImpl(CommodityMapper commodityMapper, CommodityIntroductionMapper introductionMapper, CommodityCommentService commentService, PostCommentService postCommentService, PostMapper postMapper, CommodityLikeMapper likeMapper) {
         this.commodityMapper = commodityMapper;
         this.introductionMapper = introductionMapper;
         this.commentService = commentService;
         this.postCommentService = postCommentService;
         this.postMapper = postMapper;
+        this.likeMapper = likeMapper;
     }
 
     /**
@@ -145,6 +145,9 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
             postCommentService.removeCommentByPostId(post.getId());
         }
         postMapper.delete(queryWrapper);
+        QueryWrapper<CommodityLike> wrapper = new QueryWrapper<>();
+        wrapper.eq("commodity_id", id);
+        likeMapper.delete(wrapper);
         int flag = commodityMapper.deleteById(id);
         System.out.println(flag);
         return flag > 0;
