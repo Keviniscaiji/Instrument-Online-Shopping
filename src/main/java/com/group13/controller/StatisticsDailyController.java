@@ -59,5 +59,12 @@ public class StatisticsDailyController {
         Map<String, Object> map = staService.getShowData(type,begin,end);
         return R.ok().data(map);
     }
+
+    @ApiOperation("Pie Chart shows")
+    @GetMapping("showPieData/{day}")
+    public R showPieData(@PathVariable String day){
+        Map<String, Object> map = staService.getPieShowData(day);
+        return R.ok().data(map);
+    }
 }
 

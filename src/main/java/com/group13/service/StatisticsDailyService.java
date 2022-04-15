@@ -32,4 +32,10 @@ public interface StatisticsDailyService extends IService<StatisticsDaily> {
      */
     Map<String, Object> getShowData(String type, String begin, String end);
 
+    /**
+     * 饼状图显示数据
+     * @param day
+     * @return
+     */
+    Map<String, Object> getPieShowData(String day);
 }
