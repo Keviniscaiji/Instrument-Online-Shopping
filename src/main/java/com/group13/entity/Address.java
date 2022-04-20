@@ -1,10 +1,6 @@
 package com.group13.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -19,13 +15,13 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author group13
- * @since 2022-04-15
+ * @since 2022-04-20
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="Cart对象", description="")
-public class Cart implements Serializable {
+@ApiModel(value="Address对象", description="")
+public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,19 +30,10 @@ public class Cart implements Serializable {
 
     private String userId;
 
-    private String commodityId;
+    private String nationId;
 
-    private Integer amount;
+    private String address1;
 
-    @TableField(fill = FieldFill.INSERT)
-    private Date gmtCreate;
-
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date gmtModify;
-
-    private Integer status;
-
-    private String orderId;
-
+    private String address2;
 
 }

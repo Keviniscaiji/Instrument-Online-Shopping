@@ -53,6 +53,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         Boolean isActive = userQueryVo.getIsActive();
         String begin = userQueryVo.getBegin();
         String end = userQueryVo.getEnd();
+
         if (!StringUtils.isEmpty(username)){
             wrapper.like("username", username);
         }

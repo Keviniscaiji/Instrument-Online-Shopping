@@ -19,24 +19,25 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author group13
- * @since 2022-04-15
+ * @since 2022-04-20
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="Cart对象", description="")
-public class Cart implements Serializable {
+@ApiModel(value="Order对象", description="")
+public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
+    private String addressId;
+
     private String userId;
 
-    private String commodityId;
-
-    private Integer amount;
+    @ApiModelProperty(value = "0: pickup, 1: delivery")
+    private Integer method;
 
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
@@ -45,8 +46,5 @@ public class Cart implements Serializable {
     private Date gmtModify;
 
     private Integer status;
-
-    private String orderId;
-
 
 }

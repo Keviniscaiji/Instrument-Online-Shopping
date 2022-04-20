@@ -1,0 +1,27 @@
+package com.group13.service;
+
+import com.group13.entity.Orders;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.group13.entity.vo.OrderQueryVo;
+
+import java.util.Map;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author group13
+ * @since 2022-04-20
+ */
+public interface OrdersService extends IService<Orders> {
+
+    /**
+     * page order list by condition
+     * @param current
+     * @param limit
+     * @param orderQueryVo
+     * @return
+     */
+    Map<String, Object> pageByVo(long current, long limit, OrderQueryVo orderQueryVo);
+}
