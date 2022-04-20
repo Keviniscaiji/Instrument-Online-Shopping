@@ -99,12 +99,81 @@ public class WxApiController {
             //使用jwt根据member对象生成token字符串
             String jwtToken = JwtUtils.getJwtToken(member.getId(), member.getNickname());
             //最后：返回首页面，通过路径传递token字符串
-            return "redirect:http://8.130.13.122/middlepage?token="+jwtToken;
+            return "redirect:http://localhost:9528/middlepage?token="+jwtToken;
         }catch (Exception e){
             throw new Group13Exception(20001,"登陆失败");
         }
     }
 
+    /**
+     * 获取扫描人信息，添加数据
+     * @return
+     */
+    @ApiOperation("获取扫描人信息，添加数据")
+    @GetMapping("callbackMS")
+    public String callbackMS(String code, String state){
+        try{
+            // 1 获取code值， 临时票据， 类似验证码
+            // 2 使用code请求微信固定地址，获得access_token 和 openid
+            String baseAccessTokenUrl = "https://api.weixin.qq.com/sns/oauth2/access_token" +
+                    "?appid=%s" +
+                    "&secret=%s" +
+                    "&code=%s" +
+                    "&grant_type=authorization_code";
+            // 3 传入参数 id， key， code
+            String accessTokenUrl = String.format(
+                    baseAccessTokenUrl,
+                    ConstantWxUtils.WX_OPEN_APP_ID,
+                    ConstantWxUtils.WX_OPEN_APP_SECRET,
+                    code
+            );
+            // 4 请求这个地址，得到返回的值
+            // 使用httpclient发送请求，得到返回结果
+            String accessTokenInfo = HttpClientUtils.get(accessTokenUrl);
+            System.out.println("accessTokenInfo : " + accessTokenInfo);
+            // 从accessTokenInfo字符串中获取access_token和openid
+            // 把accessTokenInfo字符串转换为map集合，根据key获取value
+            // 使用json转换工具Gson
+            Gson gson = new Gson();
+            HashMap accessTokenMap = gson.fromJson(accessTokenInfo, HashMap.class);
+            String access_token = (String) accessTokenMap.get("access_token");
+            String openid = (String) accessTokenMap.get("openid");
+
+            //把扫描人信息添加数据库里面
+            //判断数据表里面是否存在相同微信信息，根据openid判断
+            Staff member = service.getOpenIdMember(openid);
+            if (ObjectUtils.isEmpty(member)){
+                // 5 使用access_token和openid，请求wx提供的固定地址，获取扫码人信息
+                // 访问微信资源服务器，获取用户信息
+                String baseUserInfoUrl = "https://api.weixin.qq.com/sns/userinfo" +
+                        "?access_token=%s" +
+                        "&openid=%s";
+                //拼接两个参数
+                String userInfoUrl = String.format(
+                        baseUserInfoUrl,
+                        access_token,
+                        openid
+                );
+                String userInfo = HttpClientUtils.get(userInfoUrl);
+                HashMap userInfoMap = gson.fromJson(userInfo, HashMap.class);
+                System.out.println("userInfo : " + userInfo);
+                String nickname = (String) userInfoMap.get("nickname");
+                String avatar = (String) userInfoMap.get("headimgurl");
+                // 如果未注册
+                member = new Staff();
+                member.setOpenid(openid);
+                member.setNickname(nickname);
+                member.setAvatar(avatar);
+                service.save(member);
+            }
+            //使用jwt根据member对象生成token字符串
+            String jwtToken = JwtUtils.getJwtToken(member.getId(), member.getNickname());
+            //最后：返回首页面，通过路径传递token字符串
+            return "redirect:http://localhost:9528/middlepage?token="+jwtToken;
+        }catch (Exception e){
+            throw new Group13Exception(20001,"登陆失败");
+        }
+    }
     /**
      * 生成vx登陆二维码
      * @return

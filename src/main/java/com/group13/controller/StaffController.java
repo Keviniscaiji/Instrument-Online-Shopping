@@ -1,6 +1,7 @@
 package com.group13.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.group13.common.R;
 import com.group13.entity.Staff;
 import com.group13.service.StaffService;
@@ -51,6 +52,23 @@ public class StaffController {
             return R.ok().data("userInfo", member);
         }
         return R.error();
+    }
+
+    /**
+     * 根据用户名登陆
+     * @return
+     */
+    @ApiOperation("根据用户名登陆")
+    @GetMapping("loginByUserName/{username}")
+    public R loginByUserName(@PathVariable String username){
+        QueryWrapper<Staff> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("nickname", username);
+        Staff staff = staffService.getOne(queryWrapper);
+        if (ObjectUtils.isEmpty(staff)){
+            return R.error();
+        }
+        String token = JwtUtils.getJwtToken(staff.getId(), staff.getNickname());
+        return R.ok().data("token", token);
     }
 
 }
