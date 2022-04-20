@@ -99,7 +99,7 @@ public class WxApiController {
             //使用jwt根据member对象生成token字符串
             String jwtToken = JwtUtils.getJwtToken(member.getId(), member.getNickname());
             //最后：返回首页面，通过路径传递token字符串
-            return "redirect:http://localhost:9528/middlepage?token="+jwtToken;
+            return "redirect:http://8.130.13.122/middlepage?token="+jwtToken;
         }catch (Exception e){
             throw new Group13Exception(20001,"登陆失败");
         }
