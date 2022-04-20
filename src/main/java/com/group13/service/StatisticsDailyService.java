@@ -38,4 +38,12 @@ public interface StatisticsDailyService extends IService<StatisticsDaily> {
      * @return
      */
     Map<String, Object> getPieShowData(String day);
+
+    /**
+     * 柱状图显示数据
+     * @param begin
+     * @param end
+     * @return
+     */
+    Map<String, Object> getBarShowData(String begin, String end);
 }

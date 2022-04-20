@@ -98,6 +98,18 @@ public class StatisticsDailyServiceImpl extends ServiceImpl<StatisticsDailyMappe
             }
         }
 
+        // 商品浏览量
+        int visited1 = commodityService.getVisitedByType(0);
+        int visited2 = commodityService.getVisitedByType(1);
+        int visited3 = commodityService.getVisitedByType(2);
+        int visited4 = commodityService.getVisitedByType(3);
+        int visited5 = commodityService.getVisitedByType(4);
+        int visited6 = commodityService.getVisitedByType(5);
+
+        // 前一天的数据
+        StatisticsDaily prevSta = staMapper.selectDiffDay(day);
+
+        System.out.println(prevSta);
 
         // 添加到统计分析表
         StatisticsDaily sta = new StatisticsDaily();
@@ -106,12 +118,20 @@ public class StatisticsDailyServiceImpl extends ServiceImpl<StatisticsDailyMappe
         sta.setCommodityBuyNum(buyCount);
         sta.setCommodityVisitNum(visitCount);
         sta.setPostNum(postCount);
+        // 购物车
         sta.setType1CartNum(type1Count);
         sta.setType2CartNum(type2Count);
         sta.setType3CartNum(type3Count);
         sta.setType4CartNum(type4Count);
         sta.setType5CartNum(type5Count);
         sta.setType6CartNum(type6Count);
+        // 商品
+        sta.setType1VisitedNum(visited1 - prevSta.getType1VisitedNum());
+        sta.setType2VisitedNum(visited2 - prevSta.getType2VisitedNum());
+        sta.setType3VisitedNum(visited3 - prevSta.getType3VisitedNum());
+        sta.setType4VisitedNum(visited4 - prevSta.getType4VisitedNum());
+        sta.setType5VisitedNum(visited5 - prevSta.getType5VisitedNum());
+        sta.setType6VisitedNum(visited6 - prevSta.getType6VisitedNum());
         //统计日期
         sta.setDateCalculated(day);
         staMapper.insert(sta);
@@ -128,7 +148,6 @@ public class StatisticsDailyServiceImpl extends ServiceImpl<StatisticsDailyMappe
     public Map<String, Object> getShowData(String type, String begin, String end) {
         QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
         wrapper.between("date_calculated", begin, end);
-        wrapper.select("date_calculated", type);
         List<StatisticsDaily> list = staMapper.selectList(wrapper);
         // 因为if安徽有两部分数据， 日期 和 日期对应数量
         // 前端要求数组json结构，对应后端java代码是list集合
@@ -189,6 +208,50 @@ public class StatisticsDailyServiceImpl extends ServiceImpl<StatisticsDailyMappe
         typeList.add("Others");
         map.put("dataList", list);
         map.put("typeList", typeList);
+        return map;
+    }
+
+    /**
+     * 柱状图显示数据
+     * @param begin
+     * @param end
+     * @return
+     */
+    @Override
+    public Map<String, Object> getBarShowData(String begin, String end) {
+        QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
+        wrapper.between("date_calculated", begin, end);
+        List<StatisticsDaily> list = staMapper.selectList(wrapper);
+        // 因为if安徽有两部分数据， 日期 和 日期对应数量
+        // 前端要求数组json结构，对应后端java代码是list集合
+        // 创建两个list集合， 一个日期list，一个日期对应数量list
+        List<String> date_calculatedList = new ArrayList<>();
+        List<Integer> type1DataList = new ArrayList<>();
+        List<Integer> type2DataList = new ArrayList<>();
+        List<Integer> type3DataList = new ArrayList<>();
+        List<Integer> type4DataList = new ArrayList<>();
+        List<Integer> type5DataList = new ArrayList<>();
+        List<Integer> type6DataList = new ArrayList<>();
+
+        // 遍历查询的所有数据list集合，进行封装
+        for (StatisticsDaily statisticsDaily : list) {
+            // 封装集合
+            date_calculatedList.add(statisticsDaily.getDateCalculated());
+            type1DataList.add(statisticsDaily.getType1VisitedNum());
+            type2DataList.add(statisticsDaily.getType2VisitedNum());
+            type3DataList.add(statisticsDaily.getType3VisitedNum());
+            type4DataList.add(statisticsDaily.getType4VisitedNum());
+            type5DataList.add(statisticsDaily.getType5VisitedNum());
+            type6DataList.add(statisticsDaily.getType6VisitedNum());
+        }
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("date_calculatedList", date_calculatedList);
+        map.put("type1DataList", type1DataList);
+        map.put("type2DataList", type2DataList);
+        map.put("type3DataList", type3DataList);
+        map.put("type4DataList", type4DataList);
+        map.put("type5DataList", type5DataList);
+        map.put("type6DataList", type6DataList);
         return map;
     }
 }

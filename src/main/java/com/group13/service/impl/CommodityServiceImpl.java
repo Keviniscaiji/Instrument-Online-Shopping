@@ -223,4 +223,15 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
         return commodityMapper.countBuy(day);
     }
 
+
+    /**
+     * 通过类型获得截止当天的该种类商品浏览总量
+     * @param type
+     * @return
+     */
+    @Override
+    public int getVisitedByType(int type) {
+        return commodityMapper.countVisitByType(type);
+    }
+
 }

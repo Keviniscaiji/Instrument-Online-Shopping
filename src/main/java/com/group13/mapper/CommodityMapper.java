@@ -29,4 +29,11 @@ public interface CommodityMapper extends BaseMapper<Commodity> {
      */
     Integer countBuy(@Param("day") String day);
 
+    /**
+     * 通过类型获得截止当天的该种类商品浏览总量
+     * @param type
+     * @return
+     */
+    int countVisitByType(@Param("type") int type);
+
 }

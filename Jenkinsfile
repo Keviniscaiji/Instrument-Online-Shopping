@@ -12,18 +12,18 @@ pipeline {
                 sh 'mvn -Dmaven.test.failure.ignore -Dmaven.test.skip=true clean package'
             }
         }
-        stage('SonarQube代码审查') {
-            steps{
-                script {
-                    // 引入SonarQubeScannar工具
-                    scannerHome = tool 'sonar-scanner'
-                }
-                // 引入SonarQube的服务器环境
-                withSonarQubeEnv('sonarQube') {
-                    sh "${scannerHome}/bin/sonar-scanner"
-                }
-            }
-        }
+//         stage('SonarQube代码审查') {
+//             steps{
+//                 script {
+//                     // 引入SonarQubeScannar工具
+//                     scannerHome = tool 'sonar-scanner'
+//                 }
+//                 // 引入SonarQube的服务器环境
+//                 withSonarQubeEnv('sonarQube') {
+//                     sh "${scannerHome}/bin/sonar-scanner"
+//                 }
+//             }
+//         }
         stage('publish project'){
             steps{
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'http://8.130.13.122/', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''chmod -R 777 /data/jar/*

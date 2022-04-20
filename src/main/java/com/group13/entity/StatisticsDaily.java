@@ -66,6 +66,25 @@ public class StatisticsDaily implements Serializable {
     @ApiModelProperty(value = "购物车type6量")
     private Integer type6CartNum;
 
+
+    @ApiModelProperty(value = "商品type1每日浏览量")
+    private Integer type1VisitedNum;
+
+    @ApiModelProperty(value = "商品type2每日浏览量")
+    private Integer type2VisitedNum;
+
+    @ApiModelProperty(value = "商品type3每日浏览量")
+    private Integer type3VisitedNum;
+
+    @ApiModelProperty(value = "商品type4每日浏览量")
+    private Integer type4VisitedNum;
+
+    @ApiModelProperty(value = "商品type5每日浏览量")
+    private Integer type5VisitedNum;
+
+    @ApiModelProperty(value = "商品type6每日浏览量")
+    private Integer type6VisitedNum;
+
     @ApiModelProperty(value = "gmtCreate")
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
@@ -73,6 +92,5 @@ public class StatisticsDaily implements Serializable {
     @ApiModelProperty(value = "gmtModify")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModify;
-
 
 }

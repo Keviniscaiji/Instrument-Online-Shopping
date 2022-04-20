@@ -2,6 +2,7 @@ package com.group13.mapper;
 
 import com.group13.entity.StatisticsDaily;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,4 +16,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StatisticsDailyMapper extends BaseMapper<StatisticsDaily> {
 
+
+    /**
+     * diff
+     * @param day
+     * @return
+     */
+    StatisticsDaily selectDiffDay(@Param("day") String day);
 }

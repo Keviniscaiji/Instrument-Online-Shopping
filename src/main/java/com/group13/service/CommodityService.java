@@ -68,4 +68,12 @@ public interface CommodityService extends IService<Commodity> {
      * @return
      */
     Integer countBuy(String day);
+
+    /**
+     * 通过类型获得截止当天的该种类商品浏览总量
+     * @param i
+     * @return
+     */
+    int getVisitedByType(int i);
+
 }

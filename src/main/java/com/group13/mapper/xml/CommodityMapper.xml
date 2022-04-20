@@ -9,4 +9,9 @@
     <select id="countBuy" resultType="java.lang.Integer">
         select sum(buy_amount) from commodity
     </select>
+    <select id="countVisitByType" resultType="java.lang.Integer">
+        select sum(visit_amount)
+        from commodity
+        where `type` = #{type}
+    </select>
 </mapper>
