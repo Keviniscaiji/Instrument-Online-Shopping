@@ -45,7 +45,6 @@ public class StaffController {
         // 解析token
         String memberId = JwtUtils.getMemberIdByJwtToken(request);
         // 根据用户id获取用户信息
-        System.out.println("12121212121212112");
         Staff member = staffService.getById(memberId);
         System.out.println(member);
         if (!ObjectUtils.isEmpty(member)){
