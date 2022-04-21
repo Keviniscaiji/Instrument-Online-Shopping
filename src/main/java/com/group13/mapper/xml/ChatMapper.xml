@@ -20,6 +20,6 @@
         and staff_id = #{staffId}
         and datediff(CURRENT_DATE, chat.gmt_create) <![CDATA[ <= 30]]>
         order by gmt_create asc
-        limit 30
+        limit 75
     </select>
 </mapper>
