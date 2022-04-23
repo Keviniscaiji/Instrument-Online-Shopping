@@ -4,8 +4,10 @@ import com.group13.common.R;
 import com.group13.entity.User;
 import com.group13.entity.vo.UserQueryVo;
 import com.group13.service.UserService;
+import com.group13.utils.MD5;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -83,6 +85,9 @@ public class UserController {
     @ApiOperation("add user")
     @PostMapping("addUser")
     public R addUser(@RequestBody User user){
+        String password = user.getPassword();
+        String md5pwd = MD5.encrypt(password);
+        user.setPassword(md5pwd);
         boolean save = userService.save(user);
         if (save){
             return R.ok();
@@ -110,6 +115,11 @@ public class UserController {
     @ApiOperation("update user")
     @PutMapping("updateUser")
     public R updateUser(@RequestBody User user){
+        User byId = userService.getById(user.getId());
+        if (!byId.getPassword().equals(user.getPassword())){
+            String password = user.getPassword();
+            user.setPassword(MD5.encrypt(password));
+        }
         boolean b = userService.updateById(user);
         if (b){
             return R.ok();
