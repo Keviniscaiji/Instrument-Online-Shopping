@@ -49,6 +49,13 @@ public class ChatServiceImpl extends ServiceImpl<ChatMapper, Chat> implements Ch
      */
     @Override
     public List<Chat> list7Day(String staffId, String userId) {
-        return chatMapper.list7Day(staffId, userId);
+        List<Chat> chats = chatMapper.list7Day(staffId, userId);
+        int right = chats.size() - 1, left = 0;
+        while (left < right){
+            Chat tmp = chats.get(left);
+            chats.set(left++, chats.get(right));
+            chats.set(right--, tmp);
+        }
+        return chats;
     }
 }

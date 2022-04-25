@@ -19,7 +19,7 @@
         WHERE user_id = #{userId}
         and staff_id = #{staffId}
         and datediff(CURRENT_DATE, chat.gmt_create) <![CDATA[ <= 30]]>
-        order by gmt_create asc
+        order by gmt_create desc
         limit 75
     </select>
 </mapper>
