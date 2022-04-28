@@ -17,6 +17,8 @@ public class OrderQueryVo {
 
     private Integer status;
 
+    private Integer flowstatus;
+
     @ApiModelProperty(value = "start time", example = "2019-01-01 10:10:10")
     private String begin;
 

@@ -53,6 +53,10 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         String end = orderQueryVo.getEnd();
         Integer method = orderQueryVo.getMethod();
         Integer status = orderQueryVo.getStatus();
+        Integer flowstatus = orderQueryVo.getFlowstatus();
+        if (!StringUtils.isEmpty(status)){
+            wrapper.eq("status", status);
+        }
         String userId = orderQueryVo.getUserId();
 
         if (!StringUtils.isEmpty(userId)){
@@ -61,9 +65,10 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         if (!StringUtils.isEmpty(method)){
             wrapper.eq("method", method);
         }
-        if (!StringUtils.isEmpty(status)){
-            wrapper.eq("status", status);
+        if (!StringUtils.isEmpty(flowstatus)){
+            wrapper.eq("flowstatus", flowstatus);
         }
+
         if (!StringUtils.isEmpty(begin)){
             wrapper.ge("gmt_create", begin);
         }

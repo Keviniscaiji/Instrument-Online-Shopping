@@ -2,6 +2,7 @@ package com.group13.controller;
 
 
 import com.group13.common.R;
+import com.group13.entity.Orders;
 import com.group13.entity.vo.OrderQueryVo;
 import com.group13.service.OrdersService;
 import io.swagger.annotations.Api;
@@ -54,15 +55,25 @@ public class OrdersController {
      * @return
      */
     @ApiOperation("delete order by id")
-    @DeleteMapping("deleteOrder/{id}")
-    public R deleteUser(@PathVariable String id){
-        boolean b = ordersService.removeById(id);
-        if (b){
-            return R.ok();
-        }
-        return R.error();
+    @PostMapping("deleteOrder/{id}")
+    public R deleteOrder(@PathVariable String id){
+        Orders order = ordersService.getById(id);
+        order.setStatus(3);
+        order.setFlowstatus(4);
+        ordersService.updateById(order);
+        return R.ok();
     }
 
+    @ApiOperation("nextStep order by id")
+    @PostMapping("nextStep/{id}")
+    public R nextStep(@PathVariable String id){
+        Orders order = ordersService.getById(id);
+        Integer flowstatus = order.getFlowstatus();
+        flowstatus ++;
+        order.setFlowstatus(flowstatus);
+        ordersService.updateById(order);
+        return R.ok();
+    }
 
 }
 

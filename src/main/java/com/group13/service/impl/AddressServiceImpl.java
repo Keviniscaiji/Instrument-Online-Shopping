@@ -50,6 +50,7 @@ public class AddressServiceImpl extends ServiceImpl<AddressMapper, Address> impl
         addressMapper.insert(address1);
         Orders orders = ordersMapper.selectById(id);
         orders.setAddressId(uuid);
+        orders.setStatus(0);
         ordersMapper.updateById(orders);
     }
 }
