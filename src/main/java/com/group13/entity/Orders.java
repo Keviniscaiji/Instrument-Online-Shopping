@@ -53,4 +53,6 @@ public class Orders implements Serializable {
 
     private Integer flowstatus;
 
+    private Integer priority;
+
 }

@@ -41,7 +41,7 @@ public class CommodityController {
      * @return
      */
     @ApiOperation("get all commodities list")
-    @GetMapping("getCommodityList")
+    @PostMapping("getCommodityList")
     public R getCommodityList(){
         List<Commodity> commodityList = commodityService.list(null);
         return R.ok().data("commodityList",commodityList);
@@ -69,7 +69,7 @@ public class CommodityController {
      * @return
      */
     @ApiOperation("delete commodity by id")
-    @DeleteMapping("deleteCommodity/{id}")
+    @PostMapping("deleteCommodity/{id}")
     public R deleteCommodity(@PathVariable String id){
         boolean b = commodityService.removeCommodity(id);
         if (b){
@@ -108,12 +108,29 @@ public class CommodityController {
      * @param id
      * @return
      */
-    @ApiOperation(value = "根据课程查询课程基本信息")
-    @GetMapping("getBasicInfo/{id}")
+    @ApiOperation(value = "get Basic Info")
+    @PostMapping("getBasicInfo/{id}")
     public R getBasicInfo(@PathVariable String id){
         CommodityBasicInfoDto commodityBasicInfoDto = commodityService.getBasicInfo(id);
         return R.ok().data("commodityBasicInfoDto",commodityBasicInfoDto);
     }
+
+    /**
+     * Change discount
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "Change discount")
+    @PostMapping("changeDiscount/{id}")
+    public R changeDiscount(@PathVariable String id){
+        Commodity commodity = commodityService.getById(id);
+        int discount = commodity.getDiscount();
+        commodity.setDiscount(discount ^ 1);
+        commodityService.updateById(commodity);
+        return R.ok();
+    }
+
+
 
 }
 

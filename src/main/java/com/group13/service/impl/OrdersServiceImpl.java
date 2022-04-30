@@ -75,9 +75,10 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         if (!StringUtils.isEmpty(end)){
             wrapper.le("gmt_create", end);
         }
-
+        wrapper.orderByDesc("priority");
         // order by created tie desc
         wrapper.orderByDesc("gmt_create");
+
         ordersMapper.selectPage(page, wrapper);
         long total = page.getTotal();
         List<Orders> records = page.getRecords();

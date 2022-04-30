@@ -38,7 +38,7 @@ public class PostCommentLikeController {
      * @return
      */
     @ApiOperation("get Like List by id")
-    @GetMapping("getLikeList/{id}/{current}/{limit}")
+    @PostMapping("getLikeList/{id}/{current}/{limit}")
     public R getLikeList(@PathVariable("id") String id,
                          @PathVariable("current") long current,
                          @PathVariable("limit") long limit){
@@ -52,7 +52,7 @@ public class PostCommentLikeController {
      * @return
      */
     @ApiOperation("delete Like By Id")
-    @DeleteMapping("deleteLikeById/{id}")
+    @PostMapping("deleteLikeById/{id}")
     public R deleteLikeById(@PathVariable("id") String id){
         boolean flag = likeService.deleteById(id);
         if (flag){

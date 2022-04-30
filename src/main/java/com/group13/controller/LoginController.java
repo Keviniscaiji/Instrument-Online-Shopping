@@ -26,7 +26,7 @@ public class LoginController {
      * info
      */
     @ApiOperation("getInfo")
-    @GetMapping("info")
+    @PostMapping("info")
     public R info(){
         return R.ok().data("roles","admin")
                 .data("name","admin")

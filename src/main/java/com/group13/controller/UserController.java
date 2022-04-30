@@ -40,7 +40,7 @@ public class UserController {
      * @return
      */
     @ApiOperation("get all users list")
-    @GetMapping("getUsersList")
+    @PostMapping("getUsersList")
     public R getUsersList(){
         List<User> list = userService.list(null);
         return R.ok().data("list", list);
@@ -52,7 +52,7 @@ public class UserController {
      * @return
      */
     @ApiOperation("delete user by id")
-    @DeleteMapping("deleteUser/{id}")
+    @PostMapping("deleteUser/{id}")
     public R deleteUser(@PathVariable String id){
         boolean b = userService.removeById(id);
         if (b){
@@ -101,7 +101,7 @@ public class UserController {
      * @return
      */
     @ApiOperation("get user by id")
-    @GetMapping("getUser/{id}")
+    @PostMapping("getUser/{id}")
     public R getUser(@PathVariable String id){
         User user = userService.getById(id);
         return R.ok().data("user", user);
@@ -113,7 +113,7 @@ public class UserController {
      * @return
      */
     @ApiOperation("update user")
-    @PutMapping("updateUser")
+    @PostMapping("updateUser")
     public R updateUser(@RequestBody User user){
         User byId = userService.getById(user.getId());
         if (!byId.getPassword().equals(user.getPassword())){

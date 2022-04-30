@@ -1,8 +1,12 @@
 package com.group13.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.Date;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -35,5 +39,14 @@ public class Address implements Serializable {
     private String address1;
 
     private String address2;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String phoneNumber;
+
+    @TableField(fill = FieldFill.INSERT)
+    private Date gmtCreate;
 
 }

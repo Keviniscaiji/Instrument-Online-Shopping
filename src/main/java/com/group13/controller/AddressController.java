@@ -40,7 +40,7 @@ public class AddressController {
      * @return
      */
     @ApiOperation("select address by id")
-    @GetMapping("selectById/{id}")
+    @PostMapping("selectById/{id}")
     public R selectById(@PathVariable String id){
         Orders order = ordersService.getById(id);
         String addressId = order.getAddressId();

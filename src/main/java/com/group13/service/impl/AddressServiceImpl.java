@@ -42,11 +42,12 @@ public class AddressServiceImpl extends ServiceImpl<AddressMapper, Address> impl
      */
     @Override
     public void updateAndChange(Address address, String id) {
-        Address address1 = new Address();
-        BeanUtils.copyProperties(address, address1);
+        Address address1 = addressMapper.selectById(address);
+        address1.setAddress1(address.getAddress1());
+        address1.setAddress2(address.getAddress2());
         String uuid = UUID.randomUUID().toString();
         address1.setId(uuid);
-        System.out.println(uuid);
+        System.out.println(address1);
         addressMapper.insert(address1);
         Orders orders = ordersMapper.selectById(id);
         orders.setAddressId(uuid);

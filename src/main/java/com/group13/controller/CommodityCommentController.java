@@ -41,7 +41,7 @@ public class CommodityCommentController {
      * @return
      */
     @ApiOperation("getInfoList by commodity id")
-    @GetMapping("getInfoList/{commodityId}/{current}/{limit}")
+    @PostMapping("getInfoList/{commodityId}/{current}/{limit}")
     public R getInfoList(@PathVariable("commodityId") String commodityId,
                          @PathVariable("current") long current,
                          @PathVariable("limit") long limit){
@@ -55,7 +55,7 @@ public class CommodityCommentController {
      * @return
      */
     @ApiOperation("delete by id")
-    @DeleteMapping("delete/{id}")
+    @PostMapping("delete/{id}")
     public R delete(@PathVariable("id") String id){
         boolean b = commentService.removeCommentById(id);
         if (b){
@@ -70,7 +70,7 @@ public class CommodityCommentController {
      * @return
      */
     @ApiOperation("getInfo by id")
-    @GetMapping("getDetail/{id}")
+    @PostMapping("getDetail/{id}")
     public R getInfoList(@PathVariable("id") String id){
         CommodityComment commodityComment = commentService.getById(id);
         return R.ok().data("detail", commodityComment);

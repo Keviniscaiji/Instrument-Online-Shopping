@@ -48,7 +48,7 @@ public class CommodityIntroductionController {
      * @return
      */
     @ApiOperation("get Introduction")
-    @GetMapping("getIntro/{id}")
+    @PostMapping("getIntro/{id}")
     public R getIntro(@PathVariable String id){
         CommodityIntroduction commodityIntroduction = introductionService.getById(id);
         return R.ok().data("intro", commodityIntroduction);

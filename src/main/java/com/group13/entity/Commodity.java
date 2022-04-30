@@ -68,4 +68,5 @@ public class Commodity implements Serializable {
     @ApiModelProperty(value = "modified time")
     private Date gmtModify;
 
+    private int discount;
 }

@@ -56,7 +56,7 @@ public class PostController {
      * @return
      */
     @ApiOperation("delete post by id")
-    @DeleteMapping("deletePost/{id}")
+    @PostMapping("deletePost/{id}")
     public R deletePost(@PathVariable String id){
         boolean b = postService.removePostById(id);
         if (b){
@@ -88,7 +88,7 @@ public class PostController {
      * @return
      */
     @ApiOperation("get post by id")
-    @GetMapping("getInfo/{id}")
+    @PostMapping("getInfo/{id}")
     public R getInfo(@PathVariable String id){
         Post post = postService.getById(id);
         return R.ok().data("info", post);

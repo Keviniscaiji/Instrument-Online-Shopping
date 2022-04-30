@@ -40,7 +40,7 @@ public class StaffController {
      * @return
      */
     @ApiOperation("根据token获得用户信息")
-    @GetMapping("getMemberInfo")
+    @PostMapping("getMemberInfo")
     public R getMemberInfo(HttpServletRequest request){
         // 解析token
         String memberId = JwtUtils.getMemberIdByJwtToken(request);
@@ -58,7 +58,7 @@ public class StaffController {
      * @return
      */
     @ApiOperation("根据用户名登陆")
-    @GetMapping("loginByUserName/{username}")
+    @PostMapping("loginByUserName/{username}")
     public R loginByUserName(@PathVariable String username){
         QueryWrapper<Staff> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("nickname", username);

@@ -41,7 +41,7 @@ public class PostCommentController {
      * @return
      */
     @ApiOperation("getInfoList by post id")
-    @GetMapping("getInfoList/{postId}/{current}/{limit}")
+    @PostMapping("getInfoList/{postId}/{current}/{limit}")
     public R getInfoList(@PathVariable("postId") String postId,
                          @PathVariable("current") long current,
                          @PathVariable("limit") long limit){
@@ -55,7 +55,7 @@ public class PostCommentController {
      * @return
      */
     @ApiOperation("delete by id")
-    @DeleteMapping("delete/{id}")
+    @PostMapping("delete/{id}")
     public R delete(@PathVariable("id") String id){
         boolean b = commentService.removeCommentById(id);
         if (b){
@@ -70,7 +70,7 @@ public class PostCommentController {
      * @return
      */
     @ApiOperation("getInfo by id")
-    @GetMapping("getDetail/{id}")
+    @PostMapping("getDetail/{id}")
     public R getInfoList(@PathVariable("id") String id){
         PostComment postComment = commentService.getById(id);
         return R.ok().data("detail", postComment);

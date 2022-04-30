@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.net.URLEncoder;
@@ -40,7 +41,7 @@ public class WxApiController {
      * @return
      */
     @ApiOperation("获取扫描人信息，添加数据")
-    @GetMapping("callback")
+    @PostMapping("callback")
     public String callback(String code, String state){
         try{
             // 1 获取code值， 临时票据， 类似验证码
@@ -179,7 +180,7 @@ public class WxApiController {
      * @return
      */
     @ApiOperation("生成vx登陆二维码")
-    @GetMapping("login")
+    @PostMapping("login")
     public String getWxCode(){
         // 微信开放平台授权baseUrl  %s相当于?代表占位符
         String baseUrl = "https://open.weixin.qq.com/connect/qrconnect" +

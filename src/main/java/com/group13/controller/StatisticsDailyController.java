@@ -52,7 +52,7 @@ public class StatisticsDailyController {
      * @return
      */
     @ApiOperation("Chart shows")
-    @GetMapping("showData/{type}/{begin}/{end}")
+    @PostMapping("showData/{type}/{begin}/{end}")
     public R showData(@PathVariable String type,
                       @PathVariable String begin,
                       @PathVariable String end){
@@ -61,14 +61,14 @@ public class StatisticsDailyController {
     }
 
     @ApiOperation("Pie Chart shows")
-    @GetMapping("showPieData/{day}")
+    @PostMapping("showPieData/{day}")
     public R showPieData(@PathVariable String day){
         Map<String, Object> map = staService.getPieShowData(day);
         return R.ok().data(map);
     }
 
     @ApiOperation("Bar Chart shows")
-    @GetMapping("showBarData/{begin}/{end}")
+    @PostMapping("showBarData/{begin}/{end}")
     public R showBarData(@PathVariable String begin,
                          @PathVariable String end){
         Map<String, Object> map = staService.getBarShowData(begin,end);
