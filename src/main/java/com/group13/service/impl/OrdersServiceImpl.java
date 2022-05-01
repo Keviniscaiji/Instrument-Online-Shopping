@@ -3,6 +3,7 @@ package com.group13.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.group13.entity.Orders;
+import com.group13.entity.dto.RefundDto;
 import com.group13.entity.vo.OrderQueryVo;
 import com.group13.mapper.OrdersMapper;
 import com.group13.service.OrdersService;
@@ -26,6 +27,7 @@ import java.util.Map;
  * @since 2022-04-20
  */
 @Service
+@Transactional
 public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> implements OrdersService {
 
     private OrdersMapper ordersMapper;
@@ -86,5 +88,18 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         map.put("total", total);
         map.put("rows", records);
         return map;
+    }
+
+    /**
+     * 退款后重置商品数量
+     * @param id
+     */
+    @Override
+    public void refundAmount(String id) {
+        List<RefundDto> list = ordersMapper.getCommodityDetail(id);
+        for (RefundDto tmp : list){
+            System.out.println(tmp.getCommodityId() + " : " + tmp.getAmount());
+            ordersMapper.changeAmount(tmp.getCommodityId(), tmp.getAmount());
+        }
     }
 }

@@ -61,6 +61,7 @@ public class OrdersController {
         order.setStatus(3);
         order.setFlowstatus(4);
         ordersService.updateById(order);
+        ordersService.refundAmount(id);
         return R.ok();
     }
 

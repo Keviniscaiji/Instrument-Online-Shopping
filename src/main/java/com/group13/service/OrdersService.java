@@ -24,4 +24,10 @@ public interface OrdersService extends IService<Orders> {
      * @return
      */
     Map<String, Object> pageByVo(long current, long limit, OrderQueryVo orderQueryVo);
+
+    /**
+     * 退款后重置商品数量
+     * @param id
+     */
+    void refundAmount(String id);
 }
