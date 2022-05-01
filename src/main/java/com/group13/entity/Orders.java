@@ -39,10 +39,6 @@ public class Orders implements Serializable {
     @ApiModelProperty(value = "0: pickup, 1: delivery")
     private Integer method;
 
-    private String firstName;
-
-    private String lastName;
-
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
