@@ -49,4 +49,5 @@ public class Address implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
+    private Integer deleted;
 }
