@@ -22,7 +22,7 @@ import java.util.Map;
  */
 @RestController
 @Api(tags = "Orders Controller")
-@RequestMapping("/order")
+@RequestMapping("/api/order")
 @CrossOrigin
 public class OrdersController {
 

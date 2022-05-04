@@ -24,7 +24,7 @@ import java.util.List;
  * @since 2022-04-21
  */
 @RestController
-@RequestMapping("/chat")
+@RequestMapping("/api/chat")
 @CrossOrigin
 @Api(tags = "Char Controller")
 public class ChatController {

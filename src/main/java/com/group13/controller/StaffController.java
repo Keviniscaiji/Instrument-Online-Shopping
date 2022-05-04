@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since 2022-04-20
  */
 @RestController
-@RequestMapping("/staff")
+@RequestMapping("/api/staff")
 @CrossOrigin
 @Api(tags = "staff Controller")
 public class StaffController {

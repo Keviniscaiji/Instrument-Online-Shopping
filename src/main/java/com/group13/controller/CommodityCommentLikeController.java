@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @RestController
 @Api(tags = "commodity comment like controller")
-@RequestMapping("/commodity-comment-like")
+@RequestMapping("/api/commodity-comment-like")
 @CrossOrigin
 public class CommodityCommentLikeController {
 

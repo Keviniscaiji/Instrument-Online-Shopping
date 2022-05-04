@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2022-03-16
  */
 @RestController
-@RequestMapping("/commodity-introduction")
+@RequestMapping("/api/commodity-introduction")
 @Api(tags = "Commodity Introduction Controller")
 @CrossOrigin
 public class CommodityIntroductionController {

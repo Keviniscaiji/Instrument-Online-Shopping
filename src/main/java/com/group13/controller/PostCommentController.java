@@ -23,7 +23,7 @@ import java.util.Map;
  * @since 2022-03-30
  */
 @RestController
-@RequestMapping("/post-comment")
+@RequestMapping("/api/post-comment")
 @Api(tags = "post-comment controller")
 @CrossOrigin
 public class PostCommentController {

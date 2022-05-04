@@ -24,7 +24,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin
 @Api(tags = "post management api")
-@RequestMapping("/post")
+@RequestMapping("/api/post")
 public class PostController {
 
     private PostService postService;

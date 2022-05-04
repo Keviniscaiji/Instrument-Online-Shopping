@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author xujinfengxu
  */
 @RestController
-@RequestMapping("/oss/fileoss")
+@RequestMapping("/api/oss/fileoss")
 @Api(tags = "Ali Cloud OSS file storage management")
 @CrossOrigin
 public class OssController {

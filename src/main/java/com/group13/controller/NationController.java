@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2022-04-20
  */
 @RestController
-@RequestMapping("/nation")
+@RequestMapping("/api/nation")
 public class NationController {
 
 }

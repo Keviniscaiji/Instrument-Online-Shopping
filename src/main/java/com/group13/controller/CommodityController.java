@@ -24,7 +24,7 @@ import java.util.Map;
  * @since 2022-03-16
  */
 @RestController
-@RequestMapping("/commodity")
+@RequestMapping("/api/commodity")
 @Api(tags = "Commodity Controller")
 @CrossOrigin
 public class CommodityController {

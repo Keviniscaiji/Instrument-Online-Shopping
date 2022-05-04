@@ -25,7 +25,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin
 @Api(tags = "users management api")
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
     private UserService userService;

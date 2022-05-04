@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
  * @author xujinfengxu
  */
 @RestController
-@RequestMapping("/admin/user")
+@RequestMapping("/api/admin/user")
 @Api(tags = "admin login controller")
 @CrossOrigin
 public class LoginController {

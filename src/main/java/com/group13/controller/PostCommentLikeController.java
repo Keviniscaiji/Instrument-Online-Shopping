@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @RestController
 @Api(tags = "post comment like controller")
-@RequestMapping("/post-comment-like")
+@RequestMapping("/api/post-comment-like")
 @CrossOrigin
 public class PostCommentLikeController {
 

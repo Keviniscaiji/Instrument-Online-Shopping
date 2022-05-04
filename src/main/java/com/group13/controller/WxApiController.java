@@ -25,7 +25,7 @@ import java.util.HashMap;
  */
 @CrossOrigin
 @Controller
-@RequestMapping("/api/ucenter/wx")
+@RequestMapping("/api/api/ucenter/wx")
 @Api(tags = "微信api")
 public class WxApiController {
 

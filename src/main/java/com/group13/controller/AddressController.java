@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2022-04-20
  */
 @RestController
-@RequestMapping("/address")
+@RequestMapping("/api/address")
 @Api(tags = "address Controller")
 @CrossOrigin
 public class AddressController {
