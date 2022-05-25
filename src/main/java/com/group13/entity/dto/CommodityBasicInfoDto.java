@@ -3,11 +3,6 @@ package com.group13.entity.dto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
-
-/**
- * @author xujinfengxu
- */
-@Data
 @Accessors(chain = true)
 public class CommodityBasicInfoDto {
 

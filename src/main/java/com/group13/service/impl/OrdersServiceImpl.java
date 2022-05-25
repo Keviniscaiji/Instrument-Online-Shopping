@@ -2,9 +2,13 @@ package com.group13.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.group13.entity.Cart;
+import com.group13.entity.Commodity;
 import com.group13.entity.Orders;
 import com.group13.entity.dto.RefundDto;
 import com.group13.entity.vo.OrderQueryVo;
+import com.group13.mapper.CartMapper;
+import com.group13.mapper.CommodityMapper;
 import com.group13.mapper.OrdersMapper;
 import com.group13.service.OrdersService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -14,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,10 +36,14 @@ import java.util.Map;
 public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> implements OrdersService {
 
     private OrdersMapper ordersMapper;
+    private CartMapper cartMapper;
+    private CommodityMapper commodityMapper;
 
     @Autowired
-    public OrdersServiceImpl(OrdersMapper ordersMapper) {
+    public OrdersServiceImpl(OrdersMapper ordersMapper, CartMapper cartMapper, CommodityMapper commodityMapper) {
         this.ordersMapper = ordersMapper;
+        this.cartMapper = cartMapper;
+        this.commodityMapper = commodityMapper;
     }
 
     /**
@@ -101,5 +110,23 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
             System.out.println(tmp.getCommodityId() + " : " + tmp.getAmount());
             ordersMapper.changeAmount(tmp.getCommodityId(), tmp.getAmount());
         }
+    }
+
+    /**
+     * get Commodity List By Id
+     * @param id
+     * @return
+     */
+    @Override
+    public List<Commodity> getCommodityListById(String id) {
+        QueryWrapper<Cart> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("order_id", id);
+        List<Cart> carts = cartMapper.selectList(queryWrapper);
+        List<Commodity> list = new ArrayList<>();
+        for (Cart cart : carts) {
+            Commodity commodity = commodityMapper.selectById(cart.getCommodityId());
+            list.add(commodity);
+        }
+        return list;
     }
 }

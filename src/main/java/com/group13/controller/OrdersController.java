@@ -2,6 +2,7 @@ package com.group13.controller;
 
 
 import com.group13.common.R;
+import com.group13.entity.Commodity;
 import com.group13.entity.Orders;
 import com.group13.entity.vo.OrderQueryVo;
 import com.group13.service.OrdersService;
@@ -10,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.image.Kernel;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -74,6 +77,14 @@ public class OrdersController {
         order.setFlowstatus(flowstatus);
         ordersService.updateById(order);
         return R.ok();
+    }
+
+
+    @ApiOperation("get commodity list by id")
+    @PostMapping("commodityList/{id}")
+    public R commodityList(@PathVariable String id){
+        List<Commodity> list = ordersService.getCommodityListById(id);
+        return R.ok().data("list", list);
     }
 
 }

@@ -1,9 +1,11 @@
 package com.group13.service;
 
+import com.group13.entity.Commodity;
 import com.group13.entity.Orders;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.group13.entity.vo.OrderQueryVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,4 +32,11 @@ public interface OrdersService extends IService<Orders> {
      * @param id
      */
     void refundAmount(String id);
+
+    /**
+     * get Commodity List By Id
+     * @param id
+     * @return
+     */
+    List<Commodity> getCommodityListById(String id);
 }
