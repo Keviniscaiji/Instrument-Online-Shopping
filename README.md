@@ -46,16 +46,6 @@ One of our database design decision is to use logical foreign keys instead of ph
 - We avoid large transactions and try to split large transactions into multiple smaller transactions to deal with them, which also have less chance of lock conflicts.
 
 
-## Front-end Permission Control of Staff-Portal
-
-1. Access to the back-end through the URL, through the request interceptor to determine whether there is permission to access the page if not legal then jump to Index.
-2. Scan the QR code login to the middlePage and wait for the third-party authorization authentication callback.
-3. MiddlePage processing and receive token, if there is a token to use the global Login, forced to position Index. no token directly forced to position Index.
-4. Permission control plugin based on token to determine whether the right to release.
-5. Permission controller puts token in request header, requests user information object from back-end, puts information into cookie (parses JWT).
-6. Update the global user permissions for permission authentication use.
-7. Determine whether it is the first login.
-8. Get user information and permissions to be saved in a cookie.
 
 ## Redis Cluster
 
